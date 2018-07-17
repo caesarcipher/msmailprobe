@@ -13,7 +13,7 @@ https://golang.org/doc/install
 
 You may also download the compiled release [here](https://github.com/customsync/msmailprobe/releases).
 
-### Syntax
+## Syntax
 
 List examples of commands for this applications, but simply running the binary with the `examples` command:
 
@@ -30,9 +30,14 @@ You can also get more specific help by running the binary with the arguments you
 ./msmailprobe userenum --o365
 ```
 
-### Usage
+## Usage
 
-Identify Command
+#### Identify Command
+* Used for gathering information about a host that may be pointed towards an Exchange or o365 tied domain
+* Queries for specific DNS records related to Office 365 integration
+* Attempts to extract internal domain name for onprem instance of Exchange
+* Identifies services vulnerable to time-based user enumeration for onprem Exchange
+* Lists password-sprayable services exposed for onprem Exchange host
 
 ```
 Flag to use:
@@ -42,7 +47,8 @@ Example:
 	./msmailprobe identify -t mail.target.com
 ```
 
-Userenum (o365) Command
+#### Userenum (o365) Command
+* Error-based user enumeration for Office 365 integrated email addresses
 
 ```
 Flags to use:
@@ -55,7 +61,8 @@ Examples:
 	./msmailprobe userenum --o365 -e admin@target.com
 ```
 
-Userenum (onprem) Command
+#### Userenum (onprem) Command
+* Time-based user enumeration against multiple onprem Exchange services
 
 ```
 Flags to use:
