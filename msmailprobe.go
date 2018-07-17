@@ -45,7 +45,7 @@ func main(){
 
 	
 	if len(os.Args) <= 1{
-		fmt.Println("~~MSMailProbe~~")
+		fmt.Println("~~MSMailProbe v1.001~~")
 		fmt.Println("Supply either the identify, userenum, or examples command for further assistance.\n")
 		fmt.Println("View examples:")
 		fmt.Println("	./msmailprobe examples")
