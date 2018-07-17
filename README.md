@@ -79,7 +79,7 @@ Examples:
 ## Acknowledgments
 
 * [**poptart**](https://github.com/HosakaCorp) - *For a truck load of golang assistance, poking of Exchange services, and help testing timing of responses*
-* **jlarose** - *Parsing decimal data within NTLMSSP authentication reponse for internal domain name*
+* [**jlarose**](https://github.com/jordanlarose) - *Parsing decimal data within NTLMSSP authentication reponse for internal domain name*
 * [**Vincent Yui**](https://github.com/vysec)  - Office 365 check python script
 * **grimhacker** - *Discovery/disclosure of error-based user enumeration within Office 365* [blog post](https://grimhacker.com/2017/07/24/office365-activesync-username-enumeration/)
 * **Nate Powers** - *Discovery and disclosure of OWA time-based user enumeration*
