@@ -202,7 +202,6 @@ func harvestInternalDomain(host string, outputDomain bool) string{
 		
 
 	if err != nil{
-		fmt.Println("[!] Error while attempting to resolve target host to harvest internal domain.")
 		return ""
 	}
 	ntlmResponse := resp.Header.Get("WWW-Authenticate")
