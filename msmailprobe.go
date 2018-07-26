@@ -169,6 +169,7 @@ func harvestInternalDomain(host string, outputDomain bool) string{
 	url3 := "https://"+host+"/rpc"
 	url4 := "https://"+host+"/mapi"
 	url5 := "https://"+host+"/oab"
+	url6 := "https://autodiscover."+host+"/autodiscover/autodiscover.xml"
 	var urlToHarvest string	
 	if webRequestCodeResponse(url1) == 401{
 		urlToHarvest = url1
@@ -180,6 +181,8 @@ func harvestInternalDomain(host string, outputDomain bool) string{
 		urlToHarvest = url4
 	}else if webRequestCodeResponse(url5) == 401{
 		urlToHarvest = url5
+	}else if webRequestCodeResponse(url6) == 401{
+		urlToHarvest = url6
 	}else {
 		fmt.Printf(BrightYellow,"[-] ")
 		fmt.Print("Unable to resolve host provided to harvest internal domain name.\n")
@@ -262,11 +265,14 @@ func determineValidUsers(host string, avgResponse time.Duration, userlist []stri
 	internaldomain := harvestInternalDomain(host, false)
 	url1 := "https://"+host+"/autodiscover/autodiscover.xml"
 	url2 := "https://"+host+"/Microsoft-Server-ActiveSync"
+	url3 := "https://autodiscover."+host+"/autodiscover/autodiscover.xml"
 	var urlToHarvest string	
 	if webRequestCodeResponse(url1) == 401{
 		urlToHarvest = url1
 	} else if webRequestCodeResponse(url2) == 401{
 		urlToHarvest = url2
+	}else if webRequestCodeResponse(url3) == 401{
+		urlToHarvest = url3
 	} else {
 		fmt.Println("[-] Unable to resolve host provided to determine valid users.")
 		os.Exit(2)
@@ -315,14 +321,17 @@ func basicAuthAvgTime(host string) time.Duration{
 	internaldomain := harvestInternalDomain(host, false)
 	url1 := "https://"+host+"/autodiscover/autodiscover.xml"
 	url2 := "https://"+host+"/Microsoft-Server-ActiveSync"
-	
+	url3 := "https://autodiscover."+host+"/autodiscover/autodiscover.xml"
 	var urlToHarvest string	
 	if webRequestCodeResponse(url1) == 401{
 		urlToHarvest = url1
 	} else if webRequestCodeResponse(url2) == 401{
-		fmt.Println("[i] ActiveSync not resolved.. failing over to AutoDiscover")
+		//fmt.Println("[i] ActiveSync not resolved.. failing over to AutoDiscover")
 		urlToHarvest = url2
-	} else {
+	} else if webRequestCodeResponse(url3) == 401{
+		//fmt.Println("[i] ActiveSync not resolved.. failing over to AutoDiscover")
+		urlToHarvest = url3
+	}else {
 		println("[-] Unable to resolve host provided to determine valid users.")
 		os.Exit(2)
 	}	
