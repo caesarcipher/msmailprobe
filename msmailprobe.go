@@ -467,11 +467,12 @@ func urlEnum(hostInput string){
 	}
 	asURI := "https://" + hostInput + "/Microsoft-Server-ActiveSync"
 	adURI := "https://" + hostInput + "/autodiscover/autodiscover.xml"
+	ad2URI := "https://autodiscover." + hostInput + "/autodiscover/autodiscover.xml"
 	owaURI := "https://" + hostInput + "/owa"
 	timeEndpointsIdentified := false
 	fmt.Println("")
 	fmt.Println("\nIdentifying endpoints vulnerable to time-based enumeration:")
-	timeEndpoints := []string{asURI,adURI,owaURI}
+	timeEndpoints := []string{asURI,adURI,ad2URI,owaURI}
 	for _, uri := range timeEndpoints{
 		responseCode := webRequestCodeResponse(uri)
 		if responseCode == 401{
@@ -496,7 +497,7 @@ func urlEnum(hostInput string){
 	ewsURI := "https://" + hostInput + "/ews"
 	mapiURI := "https://" + hostInput + "/mapi"
 	
-	passEndpoints401 := []string{oabURI, ewsURI, mapiURI, asURI, adURI,rpcURI}
+	passEndpoints401 := []string{oabURI, ewsURI, mapiURI, asURI, adURI,ad2URI,rpcURI}
 	for _, uri := range passEndpoints401{
 		responseCode := webRequestCodeResponse(uri)
 		if responseCode == 401{
