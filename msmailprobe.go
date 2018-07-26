@@ -421,7 +421,7 @@ func o365enum(emaillist []string, threads int) []string{
 }
 
 func webRequestBasicAuth(URI string, user string, pass string, tr *http.Transport) int{
-	timeout := time.Duration(30 * time.Second)
+	timeout := time.Duration(45 * time.Second)
 	client := &http.Client{
 		Timeout: timeout,
 		Transport: tr,
@@ -432,6 +432,8 @@ func webRequestBasicAuth(URI string, user string, pass string, tr *http.Transpor
 	resp, errr := client.Do(req)
 	if errr != nil{
 		fmt.Printf("[i] Potential Timeout - %s \n", user)
+		fmt.Printf("[i] One of your requests has taken longer than 45 seconds to respond.")
+		fmt.Printf("[i] Consider lowering amount of threads used for enumeration.")
 		log.Fatal(err)
 	}
 	return resp.StatusCode	
