@@ -246,7 +246,7 @@ func importUserList(tempname string) []string {
     var userFileString string = string(userFileBytes)
     userArray := strings.Split(userFileString, "\n")
     //Delete last unnecessary newline inserted into this slice
-    userArray = userArray[:len(userArray)]
+    userArray = userArray[:len(userArray)-1]
     return userArray
 }
 
