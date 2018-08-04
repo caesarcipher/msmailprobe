@@ -410,6 +410,10 @@ func o365enum(emaillist []string, threads int) []string {
 					mux.Lock()
 					fmt.Printf("[-]  %s - %d \n", email,responseCode)
 					mux.Unlock()
+				}else if strings.Contains(email, "@") && responseCode == 600 {
+					mux.Lock()
+					fmt.Printf(BrightYellow, "[i] Potential Timeout - " + email + "\n")
+					mux.Unlock()
 				}else {
 					mux.Lock()
 					fmt.Printf("[i] Unusual Response: %s - %d \n", email, responseCode)
@@ -434,15 +438,12 @@ func webRequestBasicAuth(URI string, user string, pass string, tr *http.Transpor
 		Timeout: timeout,
 		Transport: tr,
 	}
-	req, err := http.NewRequest("GET", URI, nil)
+	req, _ := http.NewRequest("GET", URI, nil)
 	req.Header.Set("User-Agent", "Mozilla/5.0 (iPhone; CPU iPhone OS 11_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/11.0 Mobile/15E148 Safari/604.1")
 	req.SetBasicAuth(user, pass)
 	resp, errr := client.Do(req)
 	if errr != nil {
-		fmt.Printf("[i] Potential Timeout - %s \n", user)
-		fmt.Printf("[i] One of your requests has taken longer than 45 seconds to respond.")
-		fmt.Printf("[i] Consider lowering amount of threads used for enumeration.")
-		log.Fatal(err)
+		return 600
 	}
 	return resp.StatusCode
 }
